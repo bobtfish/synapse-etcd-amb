@@ -1,0 +1,40 @@
+{
+  "haproxy": {
+    "reload_command": "service haproxy reload",
+    "config_file_path": "/etc/haproxy/haproxy.cfg",
+    "socket_file_path": "/var/run/haproxy.sock",
+    "global": [
+      "daemon",
+      "user    haproxy",
+      "group   haproxy",
+      "maxconn 4096",
+      "log     127.0.0.1 local2 notice",
+      "stats   socket /var/run/haproxy.sock"
+    ],
+    "defaults": [
+      "log      global",
+      "balance  roundrobin"
+    ]
+  },
+  "services": {
+    "%%SYNAPSE_APP%%": {
+      "discovery": {
+        "method": "etcd",
+        "path":  "/nerve/services/%%SYNAPSE_APP%%",
+        "host": "etcd",
+	"port": 4001
+      },
+      "haproxy": {
+        "port": %%SYNAPSE_PORT%%,
+        "server_options": "check inter 2000 rise 3 fall 2",
+        "frontend": [
+          "mode tcp",
+        ],
+        "backend": [
+          "mode tcp",
+        ],
+      }
+    }
+  }
+}
+
