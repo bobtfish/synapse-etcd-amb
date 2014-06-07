@@ -4,7 +4,7 @@ MAINTAINER bobtfish@bobtfish.net
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -qq -y && \
-    apt-get install -qq -y ruby1.9.3 ruby-bundler build-essential git-core iputils-ping supervisor haproxy && \
+    apt-get install -qq -y ruby1.9.3 ruby-bundler build-essential git-core iputils-ping supervisor haproxy hatop vim && \
     apt-get clean
 
 RUN git clone https://github.com/bobtfish/synapse.git;cd synapse;git checkout etcd_service_watcher;gem build *.gemspec;gem install *.gem;cd .. ; rm -r synapse
