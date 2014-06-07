@@ -16,7 +16,8 @@
     "defaults": [
       "log      global",
       "balance  roundrobin"
-    ]
+    ],
+    bind_address: "0.0.0.0"
   },
   "services": {
     "%%SYNAPSE_APP%%": {
