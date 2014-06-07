@@ -11,6 +11,8 @@ RUN git clone https://github.com/bobtfish/synapse.git;cd synapse;git checkout et
 
 ADD /synapse.conf.json /synapse.conf.json
 ADD /run.sh /run.sh
+ADD /supervisord-haproxy.conf /etc/supervisor/conf.d/supervisord-haproxy.conf
+ADD /supervisord-synapse.conf /etc/supervisor/conf.d/supervisord-synapse.conf
 RUN chmod 755 /*.sh
 
 ENTRYPOINT ["/run.sh"]

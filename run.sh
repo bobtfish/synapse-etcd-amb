@@ -19,7 +19,7 @@ sed -i -e"s/%%SYNAPSE_PORT%%/${SYNAPSE_PORT}/" /synapse.conf.json
 
 # Default argument
 if [ "$1" == "run" ];then
-  exec /usr/local/bin/synapse -c /synapse.conf.json
+  exec supervisord -n
 fi
 
 # Anything else :)

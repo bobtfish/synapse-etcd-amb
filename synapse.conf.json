@@ -1,6 +1,8 @@
 {
   "haproxy": {
-    "reload_command": "service haproxy reload",
+    "do_writes": true,
+    "do_reloads": true,
+    "reload_command": "/usr/bin/supervisorctl restart haproxy",
     "config_file_path": "/etc/haproxy/haproxy.cfg",
     "socket_file_path": "/var/run/haproxy.sock",
     "global": [
