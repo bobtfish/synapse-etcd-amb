@@ -7,15 +7,18 @@ if [ "$SYNAPSE_PORT" == "" ];then
   echo "SYNAPSE_PORT environment variable must be set" >&2
   exit 1
 fi
-PINGOUT=$(ping -c 1 -i 0 etcd 2>&1);
-if [ $? != 0 ];then
-  echo "WARNING: Cannot find host named 'etcd', you need to link an etcd container to this container!" >&2
-  echo "$PINGOUT" >&2
-#  exit 2
+if [ "$ETCD_PORT_4001_TCP_ADDR" == "" ];then
+  echo "Cannot find ETCD_PORT_4001_TCP_ADDR variable, you need to link an etcd container to this container!" >&2
+  exit 2
+fi
+if [ "$ETCD_PORT_4001_TCP_PORT" == "" ];then
+  ETCD_PORT_4001_TCP_PORT=4001
 fi
 
 sed -i -e"s/%%SYNAPSE_APP%%/${SYNAPSE_APP}/" /synapse.conf.json
 sed -i -e"s/%%SYNAPSE_PORT%%/${SYNAPSE_PORT}/" /synapse.conf.json
+sed -i -e"s/%%ETCD_HOST%%/${ETCD_PORT_4001_TCP_ADDR}/" /synapse.conf.json
+sed -i -e"s/%%ETCD_PORT%%/${ETCD_PORT_4001_TCP_PORT}/" /synapse.conf.json
 
 # Default argument
 if [ "$1" == "run" ];then

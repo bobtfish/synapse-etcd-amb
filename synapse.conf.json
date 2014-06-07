@@ -24,8 +24,8 @@
       "discovery": {
         "method": "etcd",
         "path":  "/nerve/services/%%SYNAPSE_APP%%",
-        "host": "etcd",
-	"port": 4001
+        "host": "%%ETCD_HOST%%",
+        "port": %%ETCD_PORT%%
       },
       "haproxy": {
         "port": %%SYNAPSE_PORT%%,
