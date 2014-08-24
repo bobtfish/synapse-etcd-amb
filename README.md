@@ -15,3 +15,4 @@ And then run your own app, linking it to the service ambassador for the service 
 
     docker run -d --link testservice-amb:testservice you/your_app
 
+
